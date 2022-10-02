@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { useUserContext } from '../lib/user-context';
 
 export default function Navbar() {

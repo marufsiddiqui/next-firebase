@@ -1,5 +1,6 @@
 import { signInWithPopup } from 'firebase/auth';
 import type { NextPage } from 'next';
+
 import { auth, googleAuthProvider } from '../lib/firebase';
 import { useUserContext } from '../lib/user-context';
 
