@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import { useUserContext } from '../lib/user-context';
 
 export default function Navbar() {
-  const user = null;
-  const username = null;
+  const { username, user } = useUserContext();
 
   return (
     <nav className="navbar">

@@ -7,7 +7,6 @@ const Home: NextPage = () => {
   return (
     <div>
       <Link
-        prefetch
         href={{
           pathname: '/[username]',
           query: { username: 'mars' },
