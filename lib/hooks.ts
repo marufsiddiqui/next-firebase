@@ -24,7 +24,10 @@ export function useUserData() {
   }, [user]);
 
   return {
-    user,
+    user: {
+      ...user,
+      username,
+    },
     username,
   };
 }

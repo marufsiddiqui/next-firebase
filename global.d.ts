@@ -1,12 +1,24 @@
 type Maybe<T> = T | null | undefined;
 
-type User = {
-  photoURL: Maybe<string>;
-  uid: Maybe<string>;
-  displayName: Maybe<string>;
+type AppUser = {
+  displayName?: Maybe<string>;
+  photoURL?: Maybe<string>;
+  uid?: Maybe<string>;
+  username: Maybe<string>;
+};
+
+type Post = {
+  content: Maybe<string>;
+  heartCount: Maybe<number>;
+  published: Maybe<boolean>;
+  slug: Maybe<string>;
+  title: Maybe<string>;
+  username: Maybe<string>;
+  createdAt: number;
+  updatedAt: number;
 };
 
 type UserContextType = {
-  user: Maybe<User>;
+  user: Maybe<AppUser>;
   username: Maybe<string>;
 };
