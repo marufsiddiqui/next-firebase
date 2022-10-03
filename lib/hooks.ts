@@ -24,10 +24,12 @@ export function useUserData() {
   }, [user]);
 
   return {
-    user: {
-      ...user,
-      username,
-    },
+    user: user
+      ? {
+          ...user,
+          username,
+        }
+      : null,
     username,
   };
 }

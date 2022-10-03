@@ -1,14 +1,17 @@
-import type {
+import {
   CollectionReference,
   DocumentData,
   DocumentSnapshot,
 } from 'firebase/firestore';
 import {
   collection,
+  collectionGroup,
   getDocs,
   limit,
   orderBy,
   query,
+  startAfter,
+  Timestamp,
   where,
 } from 'firebase/firestore';
 
@@ -26,17 +29,37 @@ export async function getUserWithUsername(username: string) {
 }
 
 export async function getUserPosts(userDoc: DocumentSnapshot<AppUser>) {
-  const postsQuery = query(
+  return await getPosts(
     collection(db, userDoc.ref.path, 'posts') as CollectionReference<Post>,
-    where('published', '==', true),
-    orderBy('createdAt', 'desc'),
-    limit(5)
+    5
   );
-  const postDocs = (await getDocs(postsQuery)).docs;
-  return postDocs.map(postToJSON);
 }
 
-export function postToJSON(doc: DocumentData) {
+export async function getRecentPosts(limit = 1, cursor?: Timestamp) {
+  return await getPosts(
+    collectionGroup(db, 'posts') as CollectionReference<Post>,
+    limit,
+    cursor
+  );
+}
+
+async function getPosts(
+  ref: CollectionReference,
+  LIMIT: number,
+  cursor: Timestamp = Timestamp.now()
+) {
+  const postsQuery = query(
+    ref,
+    where('published', '==', true),
+    orderBy('createdAt', 'desc'),
+    startAfter(cursor),
+    limit(LIMIT)
+  );
+  const postDocs = (await getDocs(postsQuery)).docs;
+  return postDocs.map(postToJSON<Post>);
+}
+
+export function postToJSON<T>(doc: DocumentData): T {
   const data = doc.data();
 
   return {
