@@ -34,9 +34,9 @@ export function PostItem({ post, admin = false }: PostItemProp) {
       </Link>
 
       <Link href={`/${post.username}/${post.slug}`}>
-        <h2>
-          <a>{post.title}</a>
-        </h2>
+        <a>
+          <h2>{post.title}</h2>
+        </a>
       </Link>
 
       <footer>

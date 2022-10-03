@@ -49,7 +49,7 @@ async function getPosts(
   cursor: Timestamp = Timestamp.now()
 ) {
   const postsQuery = query(
-    ref,
+    ref as CollectionReference<Post>,
     where('published', '==', true),
     orderBy('createdAt', 'desc'),
     startAfter(cursor),

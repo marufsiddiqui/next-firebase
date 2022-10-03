@@ -14,8 +14,8 @@ type Post = {
   slug: Maybe<string>;
   title: Maybe<string>;
   username: Maybe<string>;
-  createdAt: number;
-  updatedAt: number;
+  createdAt: number | Timestamp;
+  updatedAt: number | Timestamp;
 };
 
 type UserContextType = {
